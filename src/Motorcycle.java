@@ -9,8 +9,7 @@ public class Motorcycle extends Automobile{
 
     }
 
-    public Motorcycle(double tireDiameter, double length, String manufactureCompany, Date manufactureDate,
-                  String model, Engine engine, int plateNum, GearType gearType ){
+    public Motorcycle(double tireDiameter, double length, String manufactureCompany, Date manufactureDate, String model, Engine engine, int plateNum, GearType gearType ){
 
         this.tireDiameter = tireDiameter;
         this.length = length;
