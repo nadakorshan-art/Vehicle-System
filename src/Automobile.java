@@ -1,14 +1,16 @@
-import java.util.Date;
-
+import java.awt.Color;
+import java.time.LocalDate;
 
 public class Automobile {
 
     public String manufactureCompany;
-    public Date manufactureDate;
+    public LocalDate manufactureDate;
     public String model;
     public Engine engine;
     public int plateNum;
     public GearType gearType;
     private int bodySerialNum;
+    public Color color;
+
     
 }
