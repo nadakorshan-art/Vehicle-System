@@ -1,16 +1,12 @@
 import java.awt.Color;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Car extends Vehicle {
     
     public int chairNum;
     public boolean isFurniter;
 
-    public Car(){
-
-    }
-
-    public Car(int length, int width, Color color, int chairNum, boolean isFurniter, String manufactureCompany, Date manufactureDate, String model, Engine engine, int plateNum, GearType gearType ){
+    public Car(int length, int width, Color color, int chairNum, boolean isFurniter, String manufactureCompany, LocalDate manufactureDate, String model, Engine engine, int plateNum, GearType gearType ){
         this.manufactureCompany = manufactureCompany;
         this.manufactureDate = manufactureDate;
         this.model = model;
@@ -23,6 +19,5 @@ public class Car extends Vehicle {
         this.chairNum = chairNum;
         this.isFurniter = isFurniter;
     }
-
-    
+ 
 }
