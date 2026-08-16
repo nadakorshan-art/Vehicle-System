@@ -1,6 +1,6 @@
 abstract class Vehicle extends Automobile {
 
-    public int length;
-    public int width;
+    public double length;
+    public double width;
     
 }
