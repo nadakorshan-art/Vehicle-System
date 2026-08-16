@@ -1,9 +1,10 @@
-import java.util.Date;
+import java.awt.Color;
+import java.time.LocalDate;
 
 public class Automobile {
 
     public String manufactureCompany;
-    public Date manufactureDate;
+    public LocalDate manufactureDate;
     public String model;
     public Engine engine;
     public int plateNum;
@@ -17,5 +18,7 @@ public class Automobile {
     public void setBodySerialNum(int bodySerialNum) {
         this.bodySerialNum = bodySerialNum;
     }
+    public Color color;
+
     
 }
