@@ -6,7 +6,7 @@ public class Truck extends Vehicle {
     public double freeWight;
     public double fullWight;
 
-    public Truck(int length, int width, Color color, double freeWight, double fullWight, String manufactureCompany, LocalDate manufactureDate, String model, Engine engine, int plateNum, GearType gearType ){
+    public Truck(int length, int width, Color color, double freeWight, double fullWight, String manufactureCompany, LocalDate manufactureDate, String model, Engine engine, String plateNum, GearType gearType, String bodySerialNum ){
         this.manufactureCompany = manufactureCompany;
         this.manufactureDate = manufactureDate;
         this.model = model;
@@ -18,5 +18,6 @@ public class Truck extends Vehicle {
         this.color = color;
         this.freeWight = freeWight;
         this.fullWight = fullWight;
+        this.setBodySerialNum(bodySerialNum);
     }
 }

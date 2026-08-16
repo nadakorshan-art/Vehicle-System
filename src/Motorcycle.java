@@ -6,7 +6,7 @@ public class Motorcycle extends Automobile{
     public double tireDiameter;
     public double length;
 
-    public Motorcycle(double tireDiameter, double length, String manufactureCompany, LocalDate manufactureDate, String model, Engine engine, int plateNum, GearType gearType, Color color){
+    public Motorcycle(double tireDiameter, double length, String manufactureCompany, LocalDate manufactureDate, String model, Engine engine, String plateNum, GearType gearType, Color color, String bodySerialNum){
 
         this.tireDiameter = tireDiameter;
         this.length = length;
@@ -17,6 +17,7 @@ public class Motorcycle extends Automobile{
         this.plateNum = plateNum;
         this.gearType = gearType;
         this.color = color;
+        this.setBodySerialNum(bodySerialNum);
     }
     
 }

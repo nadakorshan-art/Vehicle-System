@@ -7,18 +7,17 @@ public class Automobile {
     public LocalDate manufactureDate;
     public String model;
     public Engine engine;
-    public int plateNum;
+    public String plateNum;
     public GearType gearType;
-    private int bodySerialNum;
+    private String bodySerialNum;
+    public Color color;
 
-    public int getBodySerialNum() {
+    public String getBodySerialNum() {
         return bodySerialNum;
     }
 
-    public void setBodySerialNum(int bodySerialNum) {
+    public void setBodySerialNum(String bodySerialNum) {
         this.bodySerialNum = bodySerialNum;
     }
-    public Color color;
 
-    
 }
