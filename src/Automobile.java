@@ -10,6 +10,14 @@ public class Automobile {
     public int plateNum;
     public GearType gearType;
     private int bodySerialNum;
+
+    public int getBodySerialNum() {
+        return bodySerialNum;
+    }
+
+    public void setBodySerialNum(int bodySerialNum) {
+        this.bodySerialNum = bodySerialNum;
+    }
     public Color color;
 
     
