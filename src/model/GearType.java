@@ -1,10 +1,10 @@
-public enum FuelType {
-
+package model;
+public enum GearType {
+    
     UNDEFINED,
-    DIESEL,
-    GASOLINE,
-    ELECTRIC;
-
+    NORMAL,
+    AUTOMATIC;
+    
     public String toString() {
         String name = name().toLowerCase();
         return Character.toUpperCase(name.charAt(0)) + name.substring(1);

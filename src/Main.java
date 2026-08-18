@@ -1,16 +1,13 @@
-import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-import ui.HomeView;
-import ui.MainView;
+import view.AddEngineView;
 
 public class Main extends Application{
 
     public void start(Stage primaryStage) {
 
-        HomeView homeView = new HomeView();
+        /*HomeView homeView = new HomeView();
         Scene homeScene = new Scene(homeView, 1000, 600);
 
         primaryStage.setTitle("Vehicle Management System");
@@ -24,11 +21,30 @@ public class Main extends Application{
 
             primaryStage.setScene(scene);
             primaryStage.centerOnScreen();
-        });
+        });*/
+       // delay.play();
 
-        delay.play();
+      /* AddView addView = new AddView();
 
+        Scene scene = new Scene(addView, 850, 650);
+
+        primaryStage.setTitle("Vehicle Management System");
+        primaryStage.setScene(scene);
+        primaryStage.show(); */
+
+        AddEngineView addEngineView = new AddEngineView();
+
+        Scene scene = new Scene(addEngineView, 850, 650);
+
+        primaryStage.setTitle("Vehicle Management System");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+
+        
     }
+
+    
 
     public static void main(String[] args) {
         launch(args);
