@@ -21,7 +21,7 @@ public class AddView extends BorderPane {
     private TextField widthField;
     private TextField colorField;
     private TextField seatsField;
-    private TextField furnitureTypeField;
+    private CheckBox leatherCheckBox;
 
     private Button saveButton;
     private Button cancelButton;
@@ -48,8 +48,11 @@ public class AddView extends BorderPane {
         typeComboBox.setValue("Car");
 
         plateNumField = new TextField();
+        plateNumField.setPromptText("PK23 P147");
         manufactureNameField = new TextField();
+        manufactureNameField.setPromptText("KIA");
         modelField = new TextField();
+        modelField.setPromptText("2.0L");
 
         engineComboBox = new ComboBox<>();
         engineComboBox.setPromptText("Select Engine");
@@ -58,7 +61,9 @@ public class AddView extends BorderPane {
         HBox engineBox = new HBox(5, engineComboBox, createEngineButton);
 
         manufactureDatePicker = new DatePicker();
+        manufactureDatePicker.setPromptText("mm/dd/yyyy");
         bodySerialField = new TextField();
+        bodySerialField.setPromptText("BSN-2025-001234");
 
         gearTypeComboBox = new ComboBox<>();
         gearTypeComboBox.getItems().addAll("Normal", "Automatic");
@@ -88,24 +93,39 @@ public class AddView extends BorderPane {
         grid1.add(gearTypeComboBox, 3, 3);
 
         Label section2Label = new Label("Additional Information");
-        section2Label.setStyle("-fx-font-size: 15px; -fx-font-weight: bold;");
-
+        section2Label.getStyleClass().add("section-title");
         GridPane grid2 = new GridPane();
         grid2.setHgap(15);
         grid2.setVgap(10);
-        grid2.setPadding(new Insets(10, 0, 15, 0));
+        grid2.setPadding(new Insets(10, 0, 0, 0));
+        VBox additionalInfoBox = new VBox(5, section2Label, grid2);
+        additionalInfoBox.getStyleClass().add("additional-info-box");
 
         lengthField = new TextField();
+        lengthField.setPromptText("0.0");
+        Label lengthUnit = new Label("m");
+        lengthUnit.getStyleClass().add("unit-label");
+        HBox lengthBox = new HBox(8, lengthField, lengthUnit);
+        lengthBox.setAlignment(Pos.CENTER_LEFT);
+
         widthField = new TextField();
+        widthField.setPromptText("0.0");
+        Label widthUnit = new Label("m");
+        widthUnit.getStyleClass().add("unit-label");
+        HBox widthBox = new HBox(8, widthField, widthUnit);
+        widthBox.setAlignment(Pos.CENTER_LEFT);
+
         colorField = new TextField();
+        colorField.setPromptText("Red");
         seatsField = new TextField();
-        furnitureTypeField = new TextField();
+        seatsField.setPromptText("0");
+        leatherCheckBox = new CheckBox("Leather");
 
         grid2.add(new Label("Length:"), 0, 0);
-        grid2.add(lengthField, 1, 0);
+        grid2.add(lengthBox, 1, 0);
 
         grid2.add(new Label("Width:"), 2, 0);
-        grid2.add(widthField, 3, 0);
+        grid2.add(widthBox, 3, 0);
 
         grid2.add(new Label("Color:"), 0, 1);
         grid2.add(colorField, 1, 1);
@@ -113,8 +133,8 @@ public class AddView extends BorderPane {
         grid2.add(new Label("Number of Seats:"), 2, 1);
         grid2.add(seatsField, 3, 1);
 
-        grid2.add(new Label("Type of Furniture:"), 0, 2);
-        grid2.add(furnitureTypeField, 1, 2);
+        grid2.add(new Label("Furniture:"), 2, 2);
+        grid2.add(leatherCheckBox, 3, 2);
 
         saveButton = new Button("Save");
         saveButton.getStyleClass().add("btn-primary");
@@ -129,7 +149,7 @@ public class AddView extends BorderPane {
         VBox formContainer = new VBox(10, 
             section1Label, grid1, 
             new Separator(), 
-            section2Label, grid2, 
+            additionalInfoBox, 
             actionsBox
         );
 
