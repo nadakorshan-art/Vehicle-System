@@ -1,0 +1,25 @@
+.root {
+    -fx-background-color: #f8f9fa;
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+.page-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.btn-primary {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+    -fx-padding: 7 15 7 15;
+}
+
+.custom-table {
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #e2e8f0;
+}
