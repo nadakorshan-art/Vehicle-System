@@ -35,11 +35,20 @@ public class AddEngineView extends BorderPane {
         topBar.setPadding(new Insets(0, 0, 15, 0));
 
         manufactureField = new TextField();
+        manufactureField.setPromptText("Toyota");
         manufactureDatePicker = new DatePicker();
+        manufactureDatePicker.setPromptText("mm/dd/yyyy");
         modelField = new TextField();
+        modelField.setPromptText("M20A-FKS");
         capacityField = new TextField();
+        capacityField.setPromptText("0.0");
+        Label capacityUnit = new Label("L");
+        capacityUnit.getStyleClass().add("unit-label");
+        HBox capacityBox = new HBox(8, capacityField, capacityUnit);
+        capacityBox.setAlignment(Pos.CENTER_LEFT);
         cylindersField = new TextField();
-
+        cylindersField.setPromptText("0");
+       
         fuelTypeComboBox = new ComboBox<>();
         //fuelTypeComboBox.getItems().addAll(String);
         fuelTypeComboBox.setPromptText("Select Fuel Type");
@@ -59,7 +68,7 @@ public class AddEngineView extends BorderPane {
         grid.add(modelField, 1, 1);
 
         grid.add(new Label("Capacity:"), 2, 1);
-        grid.add(capacityField, 3, 1);
+        grid.add(capacityBox, 3, 1);
 
         grid.add(new Label("Cylinders:"), 0, 2);
         grid.add(cylindersField, 1, 2);

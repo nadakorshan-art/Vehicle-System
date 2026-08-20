@@ -2,7 +2,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application{
-
+    @Override
     public void start(Stage primaryStage) {
 
         /*HomeView homeView = new HomeView();
@@ -22,13 +22,13 @@ public class Main extends Application{
         });*/
        // delay.play();
 
-      /* AddView addView = new AddView();
+       /*AddView addView = new AddView();
 
         Scene scene = new Scene(addView, 850, 650);
 
         primaryStage.setTitle("Vehicle Management System");
         primaryStage.setScene(scene);
-        primaryStage.show(); */
+        primaryStage.show();*/
 
         /*AddEngineView addEngineView = new AddEngineView();
 
