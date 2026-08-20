@@ -1,5 +1,6 @@
 package view;
 
+import java.util.Arrays;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -61,7 +62,7 @@ public class MainView extends BorderPane {
         manufactureDateColumn.setPrefWidth(140);
         actionsColumn.setPrefWidth(100);
 
-        vehicleTable.getColumns().addAll(
+        vehicleTable.getColumns().addAll(Arrays.asList(
                 plateNumberColumn,
                 brandColumn,
                 modelColumn,
@@ -69,7 +70,7 @@ public class MainView extends BorderPane {
                 bodySerialNumberColumn,
                 manufactureDateColumn,
                 actionsColumn
-        );
+        ));
 
         // Layout 
         setPadding(new Insets(25));
