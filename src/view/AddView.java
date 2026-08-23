@@ -103,29 +103,21 @@ public class AddView extends BorderPane {
 
         lengthField = new TextField();
         lengthField.setPromptText("0.0");
-        Label lengthUnit = new Label("m");
-        lengthUnit.getStyleClass().add("unit-label");
-        HBox lengthBox = new HBox(8, lengthField, lengthUnit);
-        lengthBox.setAlignment(Pos.CENTER_LEFT);
 
         widthField = new TextField();
         widthField.setPromptText("0.0");
-        Label widthUnit = new Label("m");
-        widthUnit.getStyleClass().add("unit-label");
-        HBox widthBox = new HBox(8, widthField, widthUnit);
-        widthBox.setAlignment(Pos.CENTER_LEFT);
-
+       
         colorField = new TextField();
         colorField.setPromptText("Red");
         seatsField = new TextField();
         seatsField.setPromptText("0");
         leatherCheckBox = new CheckBox("Leather");
 
-        grid2.add(new Label("Length:"), 0, 0);
-        grid2.add(lengthBox, 1, 0);
+        grid2.add(new Label("Length (m):"), 0, 0);
+        grid2.add(lengthField, 1, 0);
 
-        grid2.add(new Label("Width:"), 2, 0);
-        grid2.add(widthBox, 3, 0);
+        grid2.add(new Label("Width (m):"), 2, 0);
+        grid2.add(widthField, 3, 0);
 
         grid2.add(new Label("Color:"), 0, 1);
         grid2.add(colorField, 1, 1);
@@ -162,5 +154,18 @@ public class AddView extends BorderPane {
         } catch (Exception e) {
             System.out.println("Warning: Could not load style.css file.");
         }
+
+    }
+
+    public Button getCreateEngineButton() {
+        return createEngineButton;
+    }
+
+    public Button getSaveButton() {
+        return saveButton;
+    }
+
+    public Button getCancelButton() {
+        return cancelButton;
     }
 }

@@ -80,14 +80,14 @@ public class DetailsView extends BorderPane {
 
         addInformationRow(
             informationGrid,
-            "Length:",
+            "Length (m):",
             lengthValue,
             2
         );
 
         addInformationRow(
             informationGrid,
-            "Width:",
+            "Width (m):",
             widthValue,
             3
         );
@@ -143,7 +143,7 @@ public class DetailsView extends BorderPane {
 
         addInformationRow(
             informationGrid,
-            "Capacity:",
+            "Capacity (L):",
             capacityValue,
             11
         );

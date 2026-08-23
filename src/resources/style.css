@@ -25,19 +25,6 @@
     -fx-border-color: #e2e8f0;
 }
 
-.unit-label {
-    -fx-background-color: #eeeeee;
-    -fx-border-color: #c7c7c7;
-    -fx-border-width: 1px;
-    -fx-border-radius: 3px;
-    -fx-background-radius: 3px;
-
-    -fx-padding: 6px 9px;
-
-    -fx-text-fill: #555555;
-    -fx-font-size: 12px;
-}
-
 .section-title {
     -fx-font-size: 15px;
     -fx-font-weight: bold;
@@ -61,3 +48,39 @@
         2
     );
 }
+
+/*.icon-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+}
+
+.edit-button {
+    -fx-background-image: url('Pencil-Icon.png');
+}
+
+.details-button {
+    -fx-background-image: url('icons-rubbish.png');
+}*/
+
+.table-view {
+    -fx-table-cell-border-color: #dcdcdc; 
+}
+
+.table-view .table-cell {
+    -fx-border-color: transparent #dcdcdc #dcdcdc transparent; 
+    -fx-padding: 0.5em;
+}
+
+.table-row-cell:filled:selected {
+    -fx-background-color: #0096C9;
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #eaf4fc;
+}
+
