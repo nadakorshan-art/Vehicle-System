@@ -3,6 +3,9 @@
 
 # Java build output
 bin/
+dist/
+*.jar
+runtime/
 out/
 target/
 

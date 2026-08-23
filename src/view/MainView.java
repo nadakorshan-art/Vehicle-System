@@ -8,6 +8,9 @@ import javafx.scene.layout.*;
 
 public class MainView extends BorderPane {
 
+    private Button addButton;
+    private TableView<String> vehicleTable;
+
     public MainView() {
 
         //Header Section 
@@ -30,7 +33,7 @@ public class MainView extends BorderPane {
         Button searchButton = new Button("Search");
         searchButton.getStyleClass().add("btn-secondary");
 
-        Button addButton = new Button("+ Add");
+        addButton = new Button("+ Add");
         addButton.getStyleClass().add("btn-primary");
 
         HBox actionsBox = new HBox(10, searchField, searchButton, addButton);
@@ -42,7 +45,7 @@ public class MainView extends BorderPane {
         topBar.setPadding(new Insets(0, 0, 20, 0));
 
         //Table Section
-        TableView<String> vehicleTable = new TableView<>();
+        vehicleTable = new TableView<>();
         vehicleTable.getStyleClass().add("custom-table");
 
         TableColumn<String, String> plateNumberColumn = new TableColumn<>("Plate Number");
@@ -53,14 +56,17 @@ public class MainView extends BorderPane {
         TableColumn<String, String> manufactureDateColumn = new TableColumn<>("Manufacture Date");
         TableColumn<String, String> actionsColumn = new TableColumn<>("Actions");
 
-        // Set column widths
-        plateNumberColumn.setPrefWidth(120);
-        brandColumn.setPrefWidth(120);
-        modelColumn.setPrefWidth(120);
-        typeColumn.setPrefWidth(100);
-        bodySerialNumberColumn.setPrefWidth(160);
-        manufactureDateColumn.setPrefWidth(140);
-        actionsColumn.setPrefWidth(100);
+        vehicleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        plateNumberColumn.setMaxWidth(1f * Integer.MAX_VALUE);
+        brandColumn.setMaxWidth(1f * Integer.MAX_VALUE);
+        modelColumn.setMaxWidth(1f * Integer.MAX_VALUE);
+        typeColumn.setMaxWidth(1f * Integer.MAX_VALUE);
+        bodySerialNumberColumn.setMaxWidth(1f * Integer.MAX_VALUE);
+        manufactureDateColumn.setMaxWidth(1f * Integer.MAX_VALUE);
+
+       actionsColumn.setMaxWidth(120);
+       actionsColumn.setMinWidth(100);
 
         vehicleTable.getColumns().addAll(Arrays.asList(
                 plateNumberColumn,
@@ -71,6 +77,24 @@ public class MainView extends BorderPane {
                 manufactureDateColumn,
                 actionsColumn
         ));
+
+      /*actionsColumn.setCellFactory(param -> new TableCell<>() {
+            private final Button editBtn = new Button();
+            private final Button detailsBtn = new Button();
+            private final HBox container = new HBox(8, editBtn, detailsBtn);
+
+            {
+                editBtn.getStyleClass().addAll("icon-button", "edit-button");
+                detailsBtn.getStyleClass().addAll("icon-button", "details-button");
+                container.setStyle("-fx-alignment: CENTER;");
+            }
+
+           @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setGraphic(empty ? null : container);
+            }
+        });*/
 
         // Layout 
         setPadding(new Insets(25));
@@ -84,5 +108,14 @@ public class MainView extends BorderPane {
             // In case CSS is not found in resources
             System.out.println("Warning: Could not load style.css file. Using default JavaFX styles.");
         }
+
     }
+    
+    public Button getAddButton() {
+        return addButton;
+    }
+    public TableView<String> getVehicleTable() {
+        return vehicleTable;
+    }
+
 }
