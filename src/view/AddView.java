@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import model.Engine;
 
 public class AddView extends BorderPane {
 
@@ -11,7 +12,7 @@ public class AddView extends BorderPane {
     private TextField plateNumField;
     private TextField manufactureNameField;
     private TextField modelField;
-    private ComboBox<String> engineComboBox;
+    private ComboBox<Engine> engineComboBox;
     private Button createEngineButton;
     private DatePicker manufactureDatePicker;
     private TextField bodySerialField;
@@ -159,6 +160,10 @@ public class AddView extends BorderPane {
 
     public Button getCreateEngineButton() {
         return createEngineButton;
+    }
+
+    public ComboBox<Engine> getEngineComboBox() {
+        return engineComboBox; 
     }
 
     public Button getSaveButton() {

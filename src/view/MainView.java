@@ -5,11 +5,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import model.Automobile;
 
 public class MainView extends BorderPane {
 
     private Button addButton;
-    private TableView<String> vehicleTable;
+    private TableView<Automobile> vehicleTable;
 
     public MainView() {
 
@@ -48,13 +49,13 @@ public class MainView extends BorderPane {
         vehicleTable = new TableView<>();
         vehicleTable.getStyleClass().add("custom-table");
 
-        TableColumn<String, String> plateNumberColumn = new TableColumn<>("Plate Number");
-        TableColumn<String, String> brandColumn = new TableColumn<>("Brand");
-        TableColumn<String, String> modelColumn = new TableColumn<>("Model");
-        TableColumn<String, String> typeColumn = new TableColumn<>("Type");
-        TableColumn<String, String> bodySerialNumberColumn = new TableColumn<>("Body Serial Number");
-        TableColumn<String, String> manufactureDateColumn = new TableColumn<>("Manufacture Date");
-        TableColumn<String, String> actionsColumn = new TableColumn<>("Actions");
+        TableColumn<Automobile, String> plateNumberColumn = new TableColumn<>("Plate Number");
+        TableColumn<Automobile, String> brandColumn = new TableColumn<>("Brand");
+        TableColumn<Automobile, String> modelColumn = new TableColumn<>("Model");
+        TableColumn<Automobile, String> typeColumn = new TableColumn<>("Type");
+        TableColumn<Automobile, String> bodySerialNumberColumn = new TableColumn<>("Body Serial Number");
+        TableColumn<Automobile, String> manufactureDateColumn = new TableColumn<>("Manufacture Date");
+        TableColumn<Automobile, String> actionsColumn = new TableColumn<>("Actions");
 
         vehicleTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -114,7 +115,7 @@ public class MainView extends BorderPane {
     public Button getAddButton() {
         return addButton;
     }
-    public TableView<String> getVehicleTable() {
+    public TableView<Automobile> getVehicleTable() {
         return vehicleTable;
     }
 

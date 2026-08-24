@@ -6,12 +6,11 @@ public class Engine {
     public String manufacture;
     public LocalDate manufactureDate;
     public String model;
-    public int capacity;
+    public double  capacity;
     public int cylinders;
     public FuelType fuelType;
 
-    public Engine(String manufacture, LocalDate manufactureDate, String model, int capacity, int cylinders,FuelType fuelType) {
-
+    public Engine(String manufacture, LocalDate manufactureDate, String model, double  capacity, int cylinders,FuelType fuelType) {
         this.manufacture = manufacture;
         this.manufactureDate = manufactureDate;
         this.model = model;
@@ -19,5 +18,10 @@ public class Engine {
         this.cylinders = cylinders;
         this.fuelType = fuelType;
     }  
-    
+
+    @Override
+    public String toString() {
+        return manufacture + " - " + model + " " + capacity + "L";
+    }
+
 }
