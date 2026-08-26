@@ -148,7 +148,6 @@ public class DetailsView extends BorderPane {
             11
         );
 
-
         VBox informationBox = new VBox(informationGrid);
 
         informationBox.setStyle(
@@ -195,7 +194,6 @@ public class DetailsView extends BorderPane {
             "-fx-padding: 8px 55px;"
         );
 
-
         HBox actionsBox = new HBox(
             20,
             deleteButton,
@@ -224,7 +222,6 @@ public class DetailsView extends BorderPane {
         setCenter(mainContent);
     }
 
-
     private void addInformationRow(
             GridPane grid,
             String title,
@@ -247,5 +244,45 @@ public class DetailsView extends BorderPane {
         grid.add(titleLabel, 0, row);
         grid.add(value, 1, row);
     }
+
+    public Label getPlateNumberValue() { 
+        return plateNumberValue; 
+    }
+    public Label getTypeValue() { 
+        return typeValue; 
+    }
+    public Label getLengthValue() { 
+        return lengthValue; 
+    }
+    public Label getWidthValue() {
+        return widthValue; 
+    }
+    public Label getColorValue() { 
+        return colorValue; 
+    }
+    public Label getModelValue() { 
+        return modelValue; 
+    }
+    public Label getManufactureDateValue() { 
+        return manufactureDateValue; 
+    }
+    public Label getBodySerialValue() { 
+        return bodySerialValue; 
+    }
+    public Label getEngineModelValue() { 
+        return engineModelValue; 
+    }
+    public Label getCylindersValue() { 
+        return cylindersValue; 
+    }
+    public Label getFuelTypeValue() { 
+        return fuelTypeValue; 
+    }
+    public Label getCapacityValue() { 
+        return capacityValue; 
+    }
+    public Button getDeleteButton() { return deleteButton; }
+    public Button getUpdateButton() { return updateButton; }
+    public Button getPrintButton() { return printButton; }
 
 }
