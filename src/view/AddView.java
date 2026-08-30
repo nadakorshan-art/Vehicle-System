@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import model.Engine;
+import model.GearType;
 
 public class AddView extends BorderPane {
 
@@ -16,16 +17,21 @@ public class AddView extends BorderPane {
     private Button createEngineButton;
     private DatePicker manufactureDatePicker;
     private TextField bodySerialField;
-    private ComboBox<String> gearTypeComboBox;
-
+    private ComboBox<GearType> gearTypeComboBox;
     private TextField lengthField;
-    private TextField widthField;
     private TextField colorField;
-    private TextField seatsField;
+
+    private TextField extraField1;
     private CheckBox leatherCheckBox;
+    private TextField extraField2;
+    private TextField extraField3;
 
     private Button saveButton;
     private Button cancelButton;
+    private GridPane grid2;
+    private Label firstExtraLabel;
+    private Label secondExtraLabel;
+    private Label thirdExtraLabel;
 
     public AddView() {
 
@@ -47,6 +53,7 @@ public class AddView extends BorderPane {
         typeComboBox = new ComboBox<>();
         typeComboBox.getItems().addAll("Car", "Truck", "Motorcycle");
         typeComboBox.setValue("Car");
+        typeComboBox.setOnAction(e -> updateFieldsForType(typeComboBox.getValue()));
 
         plateNumField = new TextField();
         plateNumField.setPromptText("PK23 P147");
@@ -67,7 +74,12 @@ public class AddView extends BorderPane {
         bodySerialField.setPromptText("BSN-2025-001234");
 
         gearTypeComboBox = new ComboBox<>();
-        gearTypeComboBox.getItems().addAll("Normal", "Automatic");
+        gearTypeComboBox.getItems().setAll(GearType.values());
+        gearTypeComboBox.setPromptText("Select Gear Type");
+        lengthField = new TextField();
+        lengthField.setPromptText("0.0");
+        colorField = new TextField();
+        colorField.setPromptText("Red");
 
         grid1.add(new Label("Automobile Type:"), 0, 0);
         grid1.add(typeComboBox, 1, 0);
@@ -93,42 +105,32 @@ public class AddView extends BorderPane {
         grid1.add(new Label("Gear Type:"), 2, 3);
         grid1.add(gearTypeComboBox, 3, 3);
 
+        grid1.add(new Label("Length (m):"), 0, 4);
+        grid1.add(lengthField, 1, 4);
+
+        grid1.add(new Label("Color:"), 2, 4);
+        grid1.add(colorField, 3, 4);
+
         Label section2Label = new Label("Additional Information");
         section2Label.getStyleClass().add("section-title");
-        GridPane grid2 = new GridPane();
+        grid2 = new GridPane();
         grid2.setHgap(15);
         grid2.setVgap(10);
         grid2.setPadding(new Insets(10, 0, 0, 0));
         VBox additionalInfoBox = new VBox(5, section2Label, grid2);
         additionalInfoBox.getStyleClass().add("additional-info-box");
 
-        lengthField = new TextField();
-        lengthField.setPromptText("0.0");
-
-        widthField = new TextField();
-        widthField.setPromptText("0.0");
-       
-        colorField = new TextField();
-        colorField.setPromptText("Red");
-        seatsField = new TextField();
-        seatsField.setPromptText("0");
+        extraField1 = new TextField();
+        extraField2 = new TextField();
+        extraField3 = new TextField();
         leatherCheckBox = new CheckBox("Leather");
+        
+        firstExtraLabel = new Label();
+        secondExtraLabel = new Label();
+        thirdExtraLabel = new Label();
 
-        grid2.add(new Label("Length (m):"), 0, 0);
-        grid2.add(lengthField, 1, 0);
-
-        grid2.add(new Label("Width (m):"), 2, 0);
-        grid2.add(widthField, 3, 0);
-
-        grid2.add(new Label("Color:"), 0, 1);
-        grid2.add(colorField, 1, 1);
-
-        grid2.add(new Label("Number of Seats:"), 2, 1);
-        grid2.add(seatsField, 3, 1);
-
-        grid2.add(new Label("Furniture:"), 2, 2);
-        grid2.add(leatherCheckBox, 3, 2);
-
+        updateFieldsForType("Car");
+        
         saveButton = new Button("Save");
         saveButton.getStyleClass().add("btn-primary");
 
@@ -158,6 +160,21 @@ public class AddView extends BorderPane {
 
     }
 
+    public ComboBox<String> getTypeComboBox() {
+        return typeComboBox;
+    }
+
+    public TextField getPlateNumField() {
+        return plateNumField;
+    }
+
+    public TextField getManufactureNameField() {
+        return manufactureNameField;
+    }
+
+    public TextField getModelField() {
+        return modelField;
+    }
     public Button getCreateEngineButton() {
         return createEngineButton;
     }
@@ -166,11 +183,80 @@ public class AddView extends BorderPane {
         return engineComboBox; 
     }
 
+    public DatePicker getManufactureDatePicker() {
+        return manufactureDatePicker;
+    }
+
+    public TextField getBodySerialField() {
+        return bodySerialField;
+    }
+
+    public ComboBox<GearType> getGearTypeComboBox() {
+        return gearTypeComboBox;
+    }
+
+    public TextField getLengthField() {
+        return lengthField;
+    }
+
+    public TextField getColorField() {
+        return colorField;
+    }
+
+    public TextField getExtraField1() { return extraField1; }
+    public TextField getExtraField2() { return extraField2; }
+    public TextField getExtraField3() { return extraField3; }
+    public CheckBox getLeatherCheckBox() { return leatherCheckBox;}
+
     public Button getSaveButton() {
         return saveButton;
     }
 
     public Button getCancelButton() {
         return cancelButton;
+    }
+
+    public void updateFieldsForType(String type) {
+        grid2.getChildren().clear();
+        switch (type) {
+            case "Car":
+                firstExtraLabel.setText("Width (m):");
+                extraField1.setPromptText("0.0");
+                secondExtraLabel.setText("Number of Seats:");
+                extraField2.setPromptText("0");
+                thirdExtraLabel.setText("Furniture:");
+
+                grid2.add(firstExtraLabel, 0, 0);
+                grid2.add(extraField1, 1, 0);
+                grid2.add(secondExtraLabel, 2, 0);
+                grid2.add(extraField2, 3, 0);
+                grid2.add(thirdExtraLabel, 2, 1);
+                grid2.add(leatherCheckBox, 3, 1);
+                break;
+
+            case "Truck":
+                firstExtraLabel.setText("Width (m):");
+                extraField1.setPromptText("0.0");
+                secondExtraLabel.setText("Free Weight (kg):");
+                extraField2.setPromptText("0.0");
+                thirdExtraLabel.setText("Full Weight (kg):");
+                extraField3.setPromptText("0.0");
+
+                grid2.add(firstExtraLabel, 0, 0);
+                grid2.add(extraField1, 1, 0);
+                grid2.add(secondExtraLabel, 2, 0);
+                grid2.add(extraField2, 3, 0);
+                grid2.add(thirdExtraLabel, 2, 1);
+                grid2.add(extraField3, 3, 1);
+                break;
+
+            case "Motorcycle":
+                firstExtraLabel.setText("Tire Diameter (m):");
+                extraField1.setPromptText("0.0");
+
+                grid2.add(firstExtraLabel, 0, 0);
+                grid2.add(extraField1, 1, 0);
+                break;
+        }
     }
 }

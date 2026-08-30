@@ -11,6 +11,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.FuelType;
 
 
 public class AddEngineView extends BorderPane {
@@ -20,7 +21,7 @@ public class AddEngineView extends BorderPane {
     private TextField modelField;
     private TextField capacityField;
     private TextField cylindersField;
-    private ComboBox<String> fuelTypeComboBox;
+    private ComboBox<FuelType> fuelTypeComboBox;
 
     private Button saveButton;
     private Button cancelButton;
@@ -46,7 +47,7 @@ public class AddEngineView extends BorderPane {
         cylindersField.setPromptText("0");
        
         fuelTypeComboBox = new ComboBox<>();
-        //fuelTypeComboBox.getItems().addAll(String);
+        fuelTypeComboBox.getItems().setAll(FuelType.values());
         fuelTypeComboBox.setPromptText("Select Fuel Type");
 
         GridPane grid = new GridPane();
@@ -100,6 +101,13 @@ public class AddEngineView extends BorderPane {
         }
     }
 
+    public TextField getManufactureField(){return manufactureField;}
+    public DatePicker getManufactureDatePicker(){return manufactureDatePicker;}
+    public TextField getModelField(){return modelField;}
+    public ComboBox<FuelType> getFuleComboBox(){return fuelTypeComboBox;}
+    public TextField getCapacityField(){return capacityField;}
+    public TextField getCylindersField(){return cylindersField;}
+    public Button getSaveButton(){return saveButton;}
     public Button getCancelButton() {
         return cancelButton;
     }

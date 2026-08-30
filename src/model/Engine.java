@@ -1,8 +1,9 @@
 package model;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Engine {
-    
+public class Engine implements Serializable {
+    private static final long serialVersionUID = 1L;
     public String manufacture;
     public LocalDate manufactureDate;
     public String model;

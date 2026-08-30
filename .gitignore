@@ -8,6 +8,7 @@ dist/
 runtime/
 out/
 target/
+*.data
 
 # VS Code
 .vscode/
