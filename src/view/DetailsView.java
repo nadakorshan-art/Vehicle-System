@@ -44,90 +44,18 @@ public class DetailsView extends BorderPane {
         informationGrid.setPadding(new Insets(15, 20, 15, 20));
 
 
-        addInformationRow(
-            informationGrid,
-            "Plate Number:",
-            plateNumberValue,
-            0
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Type:",
-            typeValue,
-            1
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Length:",
-            lengthValue,
-            2
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Width:",
-            widthValue,
-            3
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Color:",
-            colorValue,
-            4
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Model:",
-            modelValue,
-            5
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Manufacture Date:",
-            manufactureDateValue,
-            6
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Body Serial Number:",
-            bodySerialValue,
-            7
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Engine Model:",
-            engineModelValue,
-            8
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Cylinders:",
-            cylindersValue,
-            9
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Fuel Type:",
-            fuelTypeValue,
-            10
-        );
-
-        addInformationRow(
-            informationGrid,
-            "Capacity:",
-            capacityValue,
-            11
-        );
-
+        addInformationRow(informationGrid, "Plate Number:", plateNumberValue, 0);
+        addInformationRow(informationGrid, "Type:", typeValue, 1);
+        addInformationRow(informationGrid, "Length:", lengthValue, 2);
+        addInformationRow(informationGrid, "Width:", widthValue, 3);
+        addInformationRow(informationGrid, "Color:", colorValue, 4);
+        addInformationRow(informationGrid, "Model:", modelValue,5);
+        addInformationRow(informationGrid, "Manufacture Date:", manufactureDateValue, 6);
+        addInformationRow(informationGrid, "Body Serial Number:", bodySerialValue, 7);
+        addInformationRow(informationGrid, "Engine Model:", engineModelValue, 8);
+        addInformationRow(informationGrid, "Cylinders:", cylindersValue, 9);
+        addInformationRow(informationGrid, "Fuel Type:", fuelTypeValue, 10);
+        addInformationRow(informationGrid, "Capacity:", capacityValue, 11);
 
         VBox informationBox = new VBox(informationGrid);
         informationBox.setStyle(
@@ -136,55 +64,25 @@ public class DetailsView extends BorderPane {
         );
 
         deleteButton.setStyle(
-            "-fx-background-color: #c95a4a;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-size: 14px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-background-radius: 3px;" +
-            "-fx-border-color: #9f4034;" +
-            "-fx-border-radius: 3px;" +
-            "-fx-padding: 8px 55px;"
+            "-fx-background-color: #c95a4a; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold;" +
+            "-fx-background-radius: 3px; -fx-border-color: #9f4034; -fx-border-radius: 3px; -fx-padding: 8px 55px;"
         );
 
-        updateButton.setStyle(
-            "-fx-background-color: #2fbe4f;" +
-            "-fx-text-fill: black;" +
-            "-fx-font-size: 14px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-background-radius: 3px;" +
-            "-fx-border-color: #218b38;" +
-            "-fx-border-radius: 3px;" +
-            "-fx-padding: 8px 55px;"
+        updateButton.setStyle("-fx-background-color: #2fbe4f; -fx-text-fill: black; -fx-font-size: 14px;" +
+            "-fx-font-weight: bold; -fx-background-radius: 3px; -fx-border-color: #218b38; -fx-border-radius: 3px; -fx-padding: 8px 55px;"
         );
 
         printButton.setStyle(
-            "-fx-background-color: #d9d9d9;" +
-            "-fx-text-fill: black;" +
-            "-fx-font-size: 14px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-background-radius: 3px;" +
-            "-fx-border-color: #888888;" +
-            "-fx-border-radius: 3px;" +
-            "-fx-padding: 8px 55px;"
+            "-fx-background-color: #d9d9d9; -fx-text-fill: black; -fx-font-size: 14px; -fx-font-weight: bold;" +
+            "-fx-background-radius: 3px; -fx-border-color: #888888; -fx-border-radius: 3px; -fx-padding: 8px 55px;"
         );
 
-
-        HBox actionsBox = new HBox(
-            20,
-            deleteButton,
-            updateButton,
-            printButton
-        );
+        HBox actionsBox = new HBox( 20, deleteButton, updateButton, printButton);
 
         actionsBox.setAlignment(Pos.CENTER_LEFT);
         actionsBox.setPadding(new Insets(25, 0, 0, 0));
 
-        VBox mainContent = new VBox(
-            20,
-            topSection,
-            informationBox,
-            actionsBox
-        );
+        VBox mainContent = new VBox( 20, topSection, informationBox, actionsBox);
 
         mainContent.setPadding(new Insets(25, 0, 0, 0));
 
@@ -196,15 +94,8 @@ public class DetailsView extends BorderPane {
 
     private void addInformationRow( GridPane grid, String title, Label value, int row) {
         Label titleLabel = new Label(title);
-        titleLabel.setStyle(
-            "-fx-font-size: 13px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-text-fill: #111111;"
-        );
-        value.setStyle(
-            "-fx-font-size: 13px;" +
-            "-fx-text-fill: #222222;"
-        );
+        titleLabel.setStyle( "-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #111111;");
+        value.setStyle( "-fx-font-size: 13px; -fx-text-fill: #222222;");
 
         grid.add(titleLabel, 0, row);
         grid.add(value, 1, row);
