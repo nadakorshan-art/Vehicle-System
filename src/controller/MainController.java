@@ -53,7 +53,7 @@ public class MainController {
         loadDataFromFiles();
         updateAllVehiclesList();
 
-        MainView mainView = new MainView();
+        mainView = new MainView();
         mainView.getVehicleTable().setItems(allVehicles);
         setupActions(mainView);
         Scene scene = new Scene( mainView, 1000, 600);
@@ -182,23 +182,20 @@ public class MainController {
         allVehicles.addAll(motorcycles);
     }
 
+    @SuppressWarnings("unchecked")
     private void loadDataFromFiles() {
-
         File file = new File(DATA_FILE);
-
         if (!file.exists()) {
             System.out.println("No saved data found.");
             return;
         }
 
         try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(DATA_FILE))) {
-
             engines = (List<Engine>) input.readObject();
             cars = (List<Car>) input.readObject();
             trucks = (List<Truck>) input.readObject();
             motorcycles = (List<Motorcycle>) input.readObject();
             System.out.println("Data loaded successfully.");
-
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error loading data: " + e.getMessage());
         }

@@ -19,7 +19,7 @@ public class AddView extends BorderPane {
     private TextField bodySerialField;
     private ComboBox<GearType> gearTypeComboBox;
     private TextField lengthField;
-    private TextField colorField;
+    private ColorPicker colorPicker = new ColorPicker(javafx.scene.paint.Color.BLACK);
 
     private TextField extraField1;
     private CheckBox leatherCheckBox;
@@ -78,8 +78,6 @@ public class AddView extends BorderPane {
         gearTypeComboBox.setPromptText("Select Gear Type");
         lengthField = new TextField();
         lengthField.setPromptText("0.0");
-        colorField = new TextField();
-        colorField.setPromptText("Red");
 
         grid1.add(new Label("Automobile Type:"), 0, 0);
         grid1.add(typeComboBox, 1, 0);
@@ -109,7 +107,7 @@ public class AddView extends BorderPane {
         grid1.add(lengthField, 1, 4);
 
         grid1.add(new Label("Color:"), 2, 4);
-        grid1.add(colorField, 3, 4);
+        grid1.add(colorPicker, 3, 4);
 
         Label section2Label = new Label("Additional Information");
         section2Label.getStyleClass().add("section-title");
@@ -199,8 +197,8 @@ public class AddView extends BorderPane {
         return lengthField;
     }
 
-    public TextField getColorField() {
-        return colorField;
+    public ColorPicker getColorPicker() {
+        return colorPicker;
     }
 
     public TextField getExtraField1() { return extraField1; }

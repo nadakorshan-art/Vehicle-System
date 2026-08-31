@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import model.Automobile;
 import model.Car;
 import model.Engine;
 import model.GearType;
@@ -14,11 +15,12 @@ import view.AddView;
 
 public class AddController {
 
-    private AddView view;
-    private Stage stage;
-    private MainController mainController;
+    private final AddView view;
+    private final Stage stage;
+    private final MainController mainController;
 
     private Engine createdEngine;
+    private Automobile vehicleToEdit = null;
 
     public AddController( AddView view, Stage stage, MainController mainController) {
 
@@ -31,11 +33,8 @@ public class AddController {
     }
 
     private void setupActions() {
-
         view.getCreateEngineButton().setOnAction( event -> openAddEngineView());
-
         view.getCancelButton().setOnAction( event -> goBack());
-
         view.getSaveButton().setOnAction( event -> saveVehicle());
     }
 
@@ -45,7 +44,6 @@ public class AddController {
     }
 
     private void openAddEngineView() {
-
         AddEngineView addEngineView = new AddEngineView();
         Stage engineStage = new Stage();
         AddEngineController controller = new AddEngineController(addEngineView, engineStage, this);
@@ -67,6 +65,53 @@ public class AddController {
         this.createdEngine = engine;
     }
 
+    public void setVehicleToEdit(Automobile vehicle) {
+        this.vehicleToEdit = vehicle;
+        if (vehicle == null) return;
+
+        view.getPlateNumField().setText(vehicle.plateNum != null ? vehicle.plateNum : "");
+        view.getPlateNumField().setDisable(false); 
+
+        view.getManufactureNameField().setText(vehicle.manufactureCompany != null ? vehicle.manufactureCompany : "");
+        view.getModelField().setText(vehicle.model != null ? vehicle.model : "");
+        view.getManufactureDatePicker().setValue(vehicle.manufactureDate);
+        view.getBodySerialField().setText(vehicle.getBodySerialNum() != null ? vehicle.getBodySerialNum() : "");
+        view.getGearTypeComboBox().setValue(vehicle.gearType);
+        loadExistingEngines();
+        if (vehicle.engine != null) {
+            view.getEngineComboBox().setValue(vehicle.engine);
+        }       
+
+        if (vehicle.color != null) {
+            java.awt.Color awtColor = vehicle.color;
+            javafx.scene.paint.Color fxColor = javafx.scene.paint.Color.rgb(
+                awtColor.getRed(), awtColor.getGreen(), awtColor.getBlue(), awtColor.getAlpha() / 255.0
+            );
+            view.getColorPicker().setValue(fxColor);
+        }
+
+        if (vehicle instanceof Car car) {
+            view.getTypeComboBox().setValue("Car");
+            view.updateFieldsForType("Car");
+            view.getLengthField().setText(String.valueOf(car.length)); 
+            view.getExtraField1().setText(String.valueOf(car.width));
+            view.getExtraField2().setText(String.valueOf(car.chairNum));
+            view.getLeatherCheckBox().setSelected(car.isFurniter);
+        } else if (vehicle instanceof Truck truck) {
+            view.getTypeComboBox().setValue("Truck");
+            view.updateFieldsForType("Truck");
+            view.getLengthField().setText(String.valueOf(truck.length)); 
+            view.getExtraField1().setText(String.valueOf(truck.width));
+            view.getExtraField2().setText(String.valueOf(truck.freeWight));
+            view.getExtraField3().setText(String.valueOf(truck.fullWight));
+        } else if (vehicle instanceof Motorcycle motorcycle) {
+            view.getTypeComboBox().setValue("Motorcycle");
+            view.updateFieldsForType("Motorcycle");
+            view.getLengthField().setText(String.valueOf(motorcycle.length)); 
+            view.getExtraField1().setText(String.valueOf(motorcycle.tireDiameter));
+        }
+    }
+
     private void goBack() {
         mainController.openMainView();
     }
@@ -86,8 +131,8 @@ public class AddController {
             double width = parseDoubleSafe(view.getExtraField1().getText());
             int seats = parseIntSafe(view.getExtraField2().getText());
             boolean leather = view.getLeatherCheckBox().isSelected();
-            //java.awt.Color color = java.awt.Color.decode(view.getColorField().getText());
-            java.awt.Color color =parseColor(view.getColorField().getText());
+            javafx.scene.paint.Color fxColor = view.getColorPicker().getValue();
+            java.awt.Color color = toAwtColor(fxColor);
 
            if ("Car".equals(type)) {
                 Car car = new Car( length, width, color, seats, leather, manufactureCompany, manufactureDate, model, engine, plateNum, gearType, bodySerialNum);
@@ -105,7 +150,15 @@ public class AddController {
 
                 Motorcycle motorcycle = new Motorcycle(tireDiameter, length, manufactureCompany, manufactureDate, model, engine, plateNum, gearType, color, bodySerialNum);
                 mainController.addMotorcycle(motorcycle);
-             }
+            }
+
+            mainController.refreshTable();
+            mainController.saveDataToFiles();
+
+            if (stage != null) {
+                stage.close();
+            }
+            mainController.openMainView();
 
         } catch (Exception e) {
 
@@ -132,39 +185,14 @@ public class AddController {
         return Integer.parseInt(text.trim());
     }
 
-    private java.awt.Color parseColor(String colorName) {
-
-    switch (colorName.trim().toLowerCase()) {
-        case "red":
-            return java.awt.Color.RED;
-
-        case "blue":
-            return java.awt.Color.BLUE;
-
-        case "green":
-            return java.awt.Color.GREEN;
-
-        case "black":
-            return java.awt.Color.BLACK;
-
-        case "white":
-            return java.awt.Color.WHITE;
-
-        case "yellow":
-            return java.awt.Color.YELLOW;
-
-        case "orange":
-            return java.awt.Color.ORANGE;
-
-        case "pink":
-            return java.awt.Color.PINK;
-
-        case "gray":
-            return java.awt.Color.GRAY;
-
-        default:
-            throw new IllegalArgumentException( "Unsupported color: " + colorName);
+    private java.awt.Color toAwtColor(javafx.scene.paint.Color fxColor) {
+        if (fxColor == null) return java.awt.Color.BLACK;
+        return new java.awt.Color(
+            (float) fxColor.getRed(),
+            (float) fxColor.getGreen(),
+            (float) fxColor.getBlue(),
+            (float) fxColor.getOpacity()
+        );
     }
-}
 
 }
