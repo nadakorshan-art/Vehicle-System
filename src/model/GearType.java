@@ -1,7 +1,6 @@
 package model;
 public enum GearType {
     
-    UNDEFINED,
     NORMAL,
     AUTOMATIC;
     

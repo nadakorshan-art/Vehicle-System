@@ -7,7 +7,7 @@ public class Car extends Vehicle {
     public int chairNum;
     public boolean isFurniter;
 
-    public Car(int length, int width, Color color, int chairNum, boolean isFurniter, String manufactureCompany, LocalDate manufactureDate, String model, Engine engine, String plateNum, GearType gearType, String bodySerialNum ){
+    public Car(double length, double width, Color color, int chairNum, boolean isFurniter, String manufactureCompany, LocalDate manufactureDate, String model, Engine engine, String plateNum, GearType gearType, String bodySerialNum ){
         this.manufactureCompany = manufactureCompany;
         this.manufactureDate = manufactureDate;
         this.model = model;

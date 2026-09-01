@@ -12,6 +12,7 @@ public class Main extends Application{
         Scene homeScene = new Scene(homeView, 1000, 600);
 
         MainController controller = new MainController(homeView, primaryStage);
+        primaryStage.setOnCloseRequest(event -> {controller.saveDataToFiles();});
 
         primaryStage.setTitle("Vehicle Management System");
         primaryStage.setScene(homeScene);
