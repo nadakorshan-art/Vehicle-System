@@ -103,18 +103,7 @@ public class DetailsController {
 
     private void handleDelete() {
 
-        if (vehicle instanceof Car) {
-            mainController.getCars().remove(vehicle);
-        } 
-        else if (vehicle instanceof Truck) {
-            mainController.getTrucks().remove(vehicle);
-        }  
-        else if (vehicle instanceof Motorcycle) {
-            mainController.getMotorcycles().remove(vehicle);
-        }
-
-        mainController.refreshTable();
-        mainController.saveDataToFiles();
+        mainController.deleteVehicle(vehicle);
         stage.close();
     }
 

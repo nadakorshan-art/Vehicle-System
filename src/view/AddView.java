@@ -32,10 +32,11 @@ public class AddView extends BorderPane {
     private Label firstExtraLabel;
     private Label secondExtraLabel;
     private Label thirdExtraLabel;
+    private Label titleLabel;
 
     public AddView() {
 
-        Label titleLabel = new Label("Add Vehicle");
+        titleLabel = new Label("Add Vehicle");
         titleLabel.getStyleClass().add("page-title");
 
         HBox topBar = new HBox(titleLabel);
@@ -156,6 +157,9 @@ public class AddView extends BorderPane {
             System.out.println("Warning: Could not load style.css file.");
         }
 
+    }
+    public Label getTitleLabel(){
+        return titleLabel;
     }
 
     public ComboBox<String> getTypeComboBox() {
