@@ -12,33 +12,24 @@ import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.*;
-import view.AddView;
-import view.DetailsView;
-import view.HomeView;
-import view.MainView;
+import view.*;
 
 public class MainController {
 
-    private HomeView homeView;
-    private Stage stage;
+    private final Stage stage;
     private MainView mainView;
 
     private List<Engine> engines = new ArrayList<>();
-    private List<Car> cars = new ArrayList<>();
-    private List<Truck> trucks = new ArrayList<>();
-    private List<Motorcycle> motorcycles = new ArrayList<>();
-    private ObservableList<Automobile> allVehicles = FXCollections.observableArrayList();
+    private List<Automobile> vehicles = new ArrayList<>();
+    private final ObservableList<Automobile> vehicleTableData = FXCollections.observableArrayList();
     private static final String DATA_FILE = "vehicles.data";
 
-    public MainController(HomeView homeView, Stage stage) {
-
-        this.homeView = homeView;
+    public MainController(Stage stage) {
         this.stage = stage;
-
+        loadDataFromFiles();
         startHomeScreen();
     }
 
@@ -50,11 +41,10 @@ public class MainController {
     }
 
     public void openMainView() {
-        loadDataFromFiles();
-        updateAllVehiclesList();
+        refreshTable();
 
         mainView = new MainView();
-        mainView.getVehicleTable().setItems(allVehicles);
+        mainView.getVehicleTable().setItems(vehicleTableData);
         setupActions(mainView);
         Scene scene = new Scene( mainView, 1000, 600);
 
@@ -82,9 +72,9 @@ public class MainController {
     }
 
     private void openAddView() {
-        AddView addView = new AddView();
-        AddController controller = new AddController( addView, stage, this);
+        AddView addView = new AddView(); 
         Stage addStage = new Stage();
+        new AddController( addView, addStage, this);
         Scene scene = new Scene( addView, 750, 550);
         addStage.setScene(scene);
         addStage.show();
@@ -93,7 +83,7 @@ public class MainController {
     private void openDetailsView(Automobile vehicle) {
         DetailsView detailsView = new DetailsView();
         Stage detailsStage = new Stage();
-        DetailsController controller = new DetailsController(detailsView, detailsStage, vehicle, this);
+        new DetailsController(detailsView, detailsStage, vehicle, this);
         detailsStage.setTitle("Vehicle Details");
         Scene scene = new Scene( detailsView, 800, 600);
         detailsStage.setScene(scene);
@@ -101,16 +91,10 @@ public class MainController {
     }
 
     public void refreshTable() {
-        updateAllVehiclesList();
+        vehicleTableData.setAll(vehicles);
 
-        if (mainView != null && mainView.getVehicleTable() != null) {
-            TableView<Automobile> table = mainView.getVehicleTable();
-        
-            table.setItems(null); 
-            table.layout();
-            table.setItems(javafx.collections.FXCollections.observableArrayList(allVehicles));
-        
-            table.refresh();
+        if (mainView != null) {
+            mainView.getVehicleTable().refresh();
         }
     }
 
@@ -119,12 +103,12 @@ public class MainController {
         String text = searchText.trim().toLowerCase();
 
         if (text.isEmpty()) {
-            updateAllVehiclesList();
+            refreshTable();
             return;
         }
 
         ObservableList<Automobile> results = FXCollections.observableArrayList();
-        for (Automobile vehicle : allVehicles) {
+        for (Automobile vehicle : vehicles) {
 
             boolean matchesPlate = vehicle.plateNum != null && vehicle.plateNum.toLowerCase().contains(text);
             boolean matchesManufacture = vehicle.manufactureCompany != null && vehicle.manufactureCompany.toLowerCase().contains(text);
@@ -134,25 +118,13 @@ public class MainController {
                 results.add(vehicle);
             }
         }
-        allVehicles.setAll(results);
+        vehicleTableData.setAll(results);
     }
 
-    public void addCar(Car car) {
-        cars.add(car);
-        updateAllVehiclesList();
+    public void addVehicle(Automobile vehicle) {
+        vehicles.add(vehicle);
         saveDataToFiles();
-    }
-
-    public void addTruck(Truck truck) {
-        trucks.add(truck);
-        updateAllVehiclesList();
-        saveDataToFiles();
-    }
-
-    public void addMotorcycle(Motorcycle motorcycle) {
-        motorcycles.add(motorcycle);
-        updateAllVehiclesList();
-        saveDataToFiles();
+        refreshTable();
     }
 
     public void addEngine(Engine engine) {
@@ -162,24 +134,9 @@ public class MainController {
     public List<Engine> getEngines() {
         return engines;
     }
-    public List<Car> getCars() {
-        return cars; 
-    }
-    public List<Truck> getTrucks() { 
-        return trucks; 
-    }
-    public List<Motorcycle> getMotorcycles() { 
-        return motorcycles; 
-    }
-    public ObservableList<Automobile> getAllVehicles() { 
-        return allVehicles; 
-    }
 
-    private void updateAllVehiclesList() {
-        allVehicles.clear();
-        allVehicles.addAll(cars);
-        allVehicles.addAll(trucks);
-        allVehicles.addAll(motorcycles);
+    public List<Automobile> getVehicles() {
+        return vehicles;
     }
 
     @SuppressWarnings("unchecked")
@@ -192,9 +149,7 @@ public class MainController {
 
         try (ObjectInputStream input = new ObjectInputStream(new FileInputStream(DATA_FILE))) {
             engines = (List<Engine>) input.readObject();
-            cars = (List<Car>) input.readObject();
-            trucks = (List<Truck>) input.readObject();
-            motorcycles = (List<Motorcycle>) input.readObject();
+            vehicles = (List<Automobile>) input.readObject();
             System.out.println("Data loaded successfully.");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error loading data: " + e.getMessage());
@@ -204,14 +159,18 @@ public class MainController {
     public void saveDataToFiles() {
         try (ObjectOutputStream output = new ObjectOutputStream(new FileOutputStream(DATA_FILE))) {
                 output.writeObject(engines);
-                output.writeObject(cars);
-                output.writeObject(trucks);
-                output.writeObject(motorcycles);
+                output.writeObject(vehicles);
 
             System.out.println("Data saved successfully.");
         } catch (IOException e) {
             System.out.println("Error saving data: " + e.getMessage());
         }
+    }
+
+    public void deleteVehicle(Automobile vehicle){
+        vehicles.remove(vehicle);
+        saveDataToFiles();
+        refreshTable();
     }
 
 }

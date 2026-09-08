@@ -19,7 +19,6 @@ public class AddController {
     private final Stage stage;
     private final MainController mainController;
 
-    private Engine createdEngine;
     private Automobile vehicleToEdit = null;
 
     public AddController( AddView view, Stage stage, MainController mainController) {
@@ -46,7 +45,7 @@ public class AddController {
     private void openAddEngineView() {
         AddEngineView addEngineView = new AddEngineView();
         Stage engineStage = new Stage();
-        AddEngineController controller = new AddEngineController(addEngineView, engineStage, this);
+        new AddEngineController(addEngineView, engineStage, this);
 
         Scene scene = new Scene( addEngineView, 700,400);
         engineStage.setTitle("Create New Engine");
@@ -60,15 +59,12 @@ public class AddController {
         view.getEngineComboBox().getItems().add(newEngine); 
         view.getEngineComboBox().setValue(newEngine);
     }
-    
-    public void setCreatedEngine(Engine engine) {
-        this.createdEngine = engine;
-    }
 
     public void setVehicleToEdit(Automobile vehicle) {
         this.vehicleToEdit = vehicle;
         if (vehicle == null) return;
 
+        view.getTitleLabel().setText("Edit Vehicle");
         view.getPlateNumField().setText(vehicle.plateNum != null ? vehicle.plateNum : "");
         view.getPlateNumField().setDisable(false); 
 
@@ -113,7 +109,7 @@ public class AddController {
     }
 
     private void goBack() {
-        mainController.openMainView();
+        stage.close();
     }
 
     private void saveVehicle() {
@@ -134,30 +130,37 @@ public class AddController {
             javafx.scene.paint.Color fxColor = view.getColorPicker().getValue();
             java.awt.Color color = toAwtColor(fxColor);
 
+            Automobile vehicle = null;
+
            if ("Car".equals(type)) {
                 Car car = new Car( length, width, color, seats, leather, manufactureCompany, manufactureDate, model, engine, plateNum, gearType, bodySerialNum);
-                mainController.addCar(car);
+                
             }else if ("Truck".equalsIgnoreCase(type)) {
                 double freeWeight = parseDoubleSafe(view.getExtraField2().getText());
                 double fullWeight = parseDoubleSafe(view.getExtraField3().getText());
 
                 Truck truck = new Truck(length, width, color, freeWeight, fullWeight, manufactureCompany, manufactureDate, model, engine, plateNum, gearType, bodySerialNum);
-                mainController.addTruck(truck);
+                
 
-                mainController.openMainView();
             } else if ("Motorcycle".equalsIgnoreCase(type)) {
                 double tireDiameter = parseDoubleSafe(view.getExtraField1().getText());
 
                 Motorcycle motorcycle = new Motorcycle(tireDiameter, length, manufactureCompany, manufactureDate, model, engine, plateNum, gearType, color, bodySerialNum);
-                mainController.addMotorcycle(motorcycle);
+               
             }
 
-            mainController.refreshTable();
-            mainController.saveDataToFiles();
+            if (vehicleToEdit == null) {
+                mainController.addVehicle(vehicle);
+            }else{
+                int index = mainController.getVehicles().indexOf(vehicleToEdit);
 
-            if (stage != null) {
-                stage.close();
+                if (index != -1) {
+                    mainController.getVehicles().set(index, vehicle);
+                    mainController.saveDataToFiles();
+                    mainController.refreshTable();
+                }
             }
+            stage.close();
             mainController.openMainView();
 
         } catch (Exception e) {
